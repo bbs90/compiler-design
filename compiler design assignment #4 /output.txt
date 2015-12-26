@@ -1,0 +1,78 @@
+( EXP radius, 2, T0L )
+( MUL pi, T0L, T1L )
+( MOV T1L, area )
+
+( ADD two, 5, T0L )
+( DVD T0L, six, T1L )
+( MUL 3, T1L, T2L )
+( SUB two, T2L, T3L )
+( MOV T3L, value )
+
+( NEG 9, T0L )
+( PLS 3, T1L )
+( MOD T0L, T1L, T2L )
+( MUL three, T2L, T3L )
+( DIV T3L, four, T4L )
+( MOV T4L, answer )
+
+( ADD 5, 76, T0L )
+( SUB 58, 18, T1L )
+( MOD 200, T1L, T2L )
+( SUB T0L, T2L, T3L )
+( MOV T3L, result )
+
+( MOV data, nest )
+
+( MUL a, x, T0L )
+( ADD T0L, b, T1L )
+( MUL T1L, c, T2L )
+( ADD T2L, d, T3L )
+( MUL T3L, x, T4L )
+( ADD T4L, e, T5L )
+( MOD T5L, divisor, T6L )
+( MOV T6L, poly )
+
+( DVD first, second, T0L )
+( DVD T0L, third, T1L )
+( DVD T1L, fourth, T2L )
+( MOV T2L, quad )
+
+( EXP radius, 2, T0L )
+( MUL pi, T0L, T1L )
+( MOV T1L, area )
+
+( ADD two, 5, T0L )
+( DVD T0L, six, T1L )
+( MUL 3, T1L, T2L )
+( SUB two, T2L, T3L )
+( MOV T3L, value )
+
+( NEG 9, T0L )
+( PLS 3, T1L )
+( MOD T0L, T1L, T2L )
+( MUL three, T2L, T3L )
+( DIV T3L, four, T4L )
+( MOV T4L, answer )
+
+( ADD 5, 76, T0L )
+( SUB 58, 18, T1L )
+( MOD 200, T1L, T2L )
+( SUB T0L, T2L, T3L )
+( MOV T3L, result )
+
+( MOV data, nest )
+
+( MUL a, x, T0L )
+( ADD T0L, b, T1L )
+( MUL T1L, c, T2L )
+( ADD T2L, d, T3L )
+( MUL T3L, x, T4L )
+( ADD T4L, e, T5L )
+( MOD T5L, divisor, T6L )
+( MOV T6L, poly )
+
+( DVD first, second, T0L )
+( DVD T0L, third, T1L )
+( DVD T1L, fourth, T2L )
+( MOV T2L, quad )
+

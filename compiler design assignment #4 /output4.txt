@@ -1,0 +1,15 @@
+( MUL divisor, quotient, T0 )
+( ADD T0, remainder, T1 )
+( MOV T1, dividend )
+
+( MUL principal, rate, T0 )
+( MUL T0, time, T1 )
+( MOV T1, interest )
+
+( ADD 1, int, T0 )
+( EXP T0, n, T1 )
+( MUL principal, T1, T2 )
+( MOV T2, compound )
+
+( MOV result, value )
+

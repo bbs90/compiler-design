@@ -1,0 +1,792 @@
+{
+ 
+ B.Bhargav Sastry
+ COSC 5340   
+ Programming Language
+ COURSE ASSIGNMENT I
+ Fall 2014
+ 
+ The Assignment has been done using Free Pascal Compiler
+ Version 2.6.2-8 [2014/01/22] for x86_64 system.
+ 
+ This Program has been compiled in a Linux system(Ubuntu 14.04)
+ therefore line ending in output file is in linux format.
+ Please open all files in wordpad or Microsoft Word while using
+ Microsoft Windows Operating System for proper viewing.
+ 
+ I have included my own input(last three) after the input which was 
+ provided(which are executed column wise) in the pdf.
+ 
+}
+
+program plassignment1;
+uses
+	sysutils,cthreads, Classes;
+	
+var { Declaring Global Variables }
+	CurrentCharacter:char;
+	ExprValue:integer;
+	ip:textfile;
+	op:textfile;
+
+
+{Procedure GetCaracter is used for reading characters
+one by one from input file and writing them in output
+file and changing the value of the parameter(as values are passed by
+reference)}	
+
+procedure GetCharacter(var token:char);
+
+begin {GetCharacter}
+			
+	
+				read(ip, token);
+				write(op, token);
+	
+	
+end;	{GetCharacter}
+	
+	
+procedure Expression( var cc:char; var expr:integer );
+
+var
+	termvalue:integer;
+	
+{
+Procedure Factor checks if the parameter cc(character typer) is a
+number or not. If it is a number then appropriate number is assigned to 
+parameter factorvalue. If cc is '(' then  procedure 
+GetCharacter is called followed by procedure Expression is called and 
+then it continues(recursion) till factorvalue is assigned a digit. If 
+the cc value is '(' then Getcharacter() is called. 
+}	
+
+procedure Factor(var cc:char; var factorvalue:integer);
+
+var
+	value:integer;
+	
+begin {Factor}
+		if cc='0' then
+			begin
+				factorvalue:=0;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='1' then
+			begin
+				factorvalue:=1;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='2' then
+			begin
+				factorvalue:=2;
+				GetCharacter( cc );
+			end;	
+		
+		 if cc='3' then
+			begin
+				factorvalue:=3;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='4' then
+			begin
+				factorvalue:=4;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='5' then
+			begin
+				factorvalue:=5;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='6' then
+			begin
+				factorvalue:=6;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='7' then
+			begin
+				factorvalue:=7;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='8' then
+			begin
+				factorvalue:=8;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='9' then
+			begin
+				factorvalue:=9;
+				GetCharacter( cc );
+			end;	
+		if  cc='('  then
+			begin
+					GetCharacter( cc );
+					Expression( cc, value );
+					factorvalue:=value;
+					if  cc=')'  then
+					begin
+						GetCharacter( cc );
+					end;
+			end;
+	
+end;	{Factor}	
+	
+	
+{
+Precedure Term calls procedure Factor and assigns value to parameter
+termvalue(passed by reference). It performs the multiplication operation
+by getting the next character and multiplying termvalue and factorvalue
+and the result is stored in termvalue. Then modulo 10 value of termvalue
+is obtained and stored in termvalue.
+}
+procedure Term(var cc:char; var termvalue:integer);
+var
+	factorvalue:integer;
+
+begin {Term}
+
+	Factor( cc, factorvalue );
+	termvalue:=factorvalue;
+	
+	while (cc='*') do
+	begin
+		GetCharacter( cc );
+		Factor( cc, factorvalue );
+		termvalue:=(termvalue*factorvalue) mod 10;
+	end;
+
+end; {Term}
+
+{
+Procedure Expression calls procedure Term from which it obtains value
+of variable expr(by storing termvalue data in expr). Then it performs 
+addition and modulo 10 operation if cc value is '+' by entering the 
+while loop. 
+}
+begin {Expression}
+
+	Term(cc, termvalue);
+	expr:=termvalue;
+	while (cc= '+') do
+		begin
+			GetCharacter( cc );
+			Term( cc, termvalue );
+			expr:=(expr+termvalue) mod 10;		
+		end;
+		
+end;	{Expression}
+
+
+	
+begin {Main body}	
+
+	assign(ip, 'input.txt');
+	reset(ip);
+	assign(op, 'output.txt');
+	rewrite(op);
+	
+	while  not eof (ip) do
+	begin
+		
+		write(op, 'THE MODULO 10 VALUE OF ');
+		GetCharacter(CurrentCharacter);
+		Expression(CurrentCharacter,ExprValue);
+		write(op, 'IS: ', ExprValue);
+		writeln(op);
+				
+	end;
+	
+	close(op);
+	close(ip);
+	
+end.
+
+
+TOKEN			TYPE
+program			KEYWORD
+plassignment1			IDENTIFIER
+;			SEMICOLON
+uses			IDENTIFIER
+sysutils			IDENTIFIER
+,			COMMA
+cthreads			IDENTIFIER
+,			COMMA
+Classes			IDENTIFIER
+;			SEMICOLON
+var			KEYWORD
+CurrentCharacter			IDENTIFIER
+:			COLON
+char			IDENTIFIER
+;			SEMICOLON
+ExprValue			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+;			SEMICOLON
+ip			IDENTIFIER
+:			COLON
+textfile			IDENTIFIER
+;			SEMICOLON
+op			IDENTIFIER
+:			COLON
+textfile			IDENTIFIER
+;			SEMICOLON
+procedure			KEYWORD
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+var			KEYWORD
+token			IDENTIFIER
+:			COLON
+char			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+begin			KEYWORD
+read			IDENTIFIER
+(			LEFT  PARENTHESIS
+ip			IDENTIFIER
+,			COMMA
+token			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+write			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+,			COMMA
+token			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+procedure			KEYWORD
+Expression			IDENTIFIER
+(			LEFT  PARENTHESIS
+var			KEYWORD
+cc			IDENTIFIER
+:			COLON
+char			IDENTIFIER
+;			SEMICOLON
+var			KEYWORD
+expr			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+var			KEYWORD
+termvalue			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+;			SEMICOLON
+procedure			KEYWORD
+Factor			IDENTIFIER
+(			LEFT  PARENTHESIS
+var			KEYWORD
+cc			IDENTIFIER
+:			COLON
+char			IDENTIFIER
+;			SEMICOLON
+var			KEYWORD
+factorvalue			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+var			KEYWORD
+value			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+;			SEMICOLON
+begin			KEYWORD
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+0			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+0			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+1			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+1			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+2			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+2			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+3			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+3			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+4			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+4			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+5			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+5			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+6			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+6			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+7			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+7			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+8			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+8			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+9			CONSTANT
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+9			CONSTANT
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+(			LEFT  PARENTHESIS
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+Expression			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+,			COMMA
+value			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+factorvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+value			IDENTIFIER
+;			SEMICOLON
+if			KEYWORD
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+)			RIGHT  PARENTHESIS
+'			SINGLE QUOTE
+then			KEYWORD
+begin			KEYWORD
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+procedure			KEYWORD
+Term			IDENTIFIER
+(			LEFT  PARENTHESIS
+var			KEYWORD
+cc			IDENTIFIER
+:			COLON
+char			IDENTIFIER
+;			SEMICOLON
+var			KEYWORD
+termvalue			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+var			KEYWORD
+factorvalue			IDENTIFIER
+:			COLON
+integer			IDENTIFIER
+;			SEMICOLON
+begin			KEYWORD
+Factor			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+,			COMMA
+factorvalue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+termvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+factorvalue			IDENTIFIER
+;			SEMICOLON
+while			KEYWORD
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
+*			STAR
+'			SINGLE QUOTE
+)			RIGHT  PARENTHESIS
+do			KEYWORD
+begin			KEYWORD
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+Factor			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+,			COMMA
+factorvalue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+termvalue			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+(			LEFT  PARENTHESIS
+termvalue			IDENTIFIER
+*			STAR
+factorvalue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+mod			KEYWORD
+10			CONSTANT
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+begin			KEYWORD
+Term			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+,			COMMA
+termvalue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+expr			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+termvalue			IDENTIFIER
+;			SEMICOLON
+while			KEYWORD
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+=			EQUAL TO
+'			SINGLE QUOTE
++			PLUS
+'			SINGLE QUOTE
+)			RIGHT  PARENTHESIS
+do			KEYWORD
+begin			KEYWORD
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+Term			IDENTIFIER
+(			LEFT  PARENTHESIS
+cc			IDENTIFIER
+,			COMMA
+termvalue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+expr			IDENTIFIER
+:=			ASSIGNMENT OPERATOR
+(			LEFT  PARENTHESIS
+expr			IDENTIFIER
++			PLUS
+termvalue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+mod			KEYWORD
+10			CONSTANT
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+begin			KEYWORD
+assign			IDENTIFIER
+(			LEFT  PARENTHESIS
+ip			IDENTIFIER
+,			COMMA
+'			SINGLE QUOTE
+input			IDENTIFIER
+.			PERIOD
+txt			IDENTIFIER
+'			SINGLE QUOTE
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+reset			IDENTIFIER
+(			LEFT  PARENTHESIS
+ip			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+assign			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+,			COMMA
+'			SINGLE QUOTE
+output			IDENTIFIER
+.			PERIOD
+txt			IDENTIFIER
+'			SINGLE QUOTE
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+rewrite			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+while			KEYWORD
+not			KEYWORD
+eof			IDENTIFIER
+(			LEFT  PARENTHESIS
+ip			IDENTIFIER
+)			RIGHT  PARENTHESIS
+do			KEYWORD
+begin			KEYWORD
+write			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+,			COMMA
+'			SINGLE QUOTE
+THE			IDENTIFIER
+MODULO			IDENTIFIER
+10			CONSTANT
+VALUE			IDENTIFIER
+OF			IDENTIFIER
+'			SINGLE QUOTE
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+GetCharacter			IDENTIFIER
+(			LEFT  PARENTHESIS
+CurrentCharacter			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+Expression			IDENTIFIER
+(			LEFT  PARENTHESIS
+CurrentCharacter			IDENTIFIER
+,			COMMA
+ExprValue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+write			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+,			COMMA
+'			SINGLE QUOTE
+IS			IDENTIFIER
+:			COLON
+'			SINGLE QUOTE
+,			COMMA
+ExprValue			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+writeln			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+;			SEMICOLON
+close			IDENTIFIER
+(			LEFT  PARENTHESIS
+op			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+close			IDENTIFIER
+(			LEFT  PARENTHESIS
+ip			IDENTIFIER
+)			RIGHT  PARENTHESIS
+;			SEMICOLON
+end			KEYWORD
+.			PERIOD
+
+
+SYMBOL TABLE
+
+TOKEN			TYPE
+plassignment1			IDENTIFER
+sysutils			IDENTIFER
+cthreads			IDENTIFER
+Classes			IDENTIFER
+CurrentCharacter			IDENTIFER
+char			IDENTIFER
+ExprValue			IDENTIFER
+integer			IDENTIFER
+ip			IDENTIFER
+textfile			IDENTIFER
+op			IDENTIFER
+GetCharacter			IDENTIFER
+token			IDENTIFER
+read			IDENTIFER
+write			IDENTIFER
+Expression			IDENTIFER
+cc			IDENTIFER
+expr			IDENTIFER
+termvalue			IDENTIFER
+Factor			IDENTIFER
+factorvalue			IDENTIFER
+value			IDENTIFER
+Term			IDENTIFER
+assign			IDENTIFER
+input			IDENTIFER
+txt			IDENTIFER
+reset			IDENTIFER
+output			IDENTIFER
+rewrite			IDENTIFER
+eof			IDENTIFER
+THE			IDENTIFER
+MODULO			IDENTIFER
+VALUE			IDENTIFER
+OF			IDENTIFER
+IS			IDENTIFER
+writeln			IDENTIFER
+close			IDENTIFER

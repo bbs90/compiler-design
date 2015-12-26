@@ -1,0 +1,28 @@
+programbin(input, output);
+{this is a binary search routine}
+type data = array[1..100] of integer;
+var a:data; i,index,item:integer;
+
+procedure binsrch(a:data; i,j:integer; var index:integer); 
+var mid:
+	integer;
+begin
+if j < i then index:=-1	{search failed}
+else begin
+       mid:=(i+j) div 2;
+       if a[mid] = item then index:=mid 		{found it}
+else if a[mid]<item then binsrch(a,mid+1,j,item,index)
+       else binsrch(a,i,mid-1,item,index)
+     end;
+end;
+
+begin
+for i := 1 to 100 do a[i] := 2*i+(i mod 2);
+for i := 1 to 5 do
+	begin
+	  read(item);
+	  binsrch(a,1,2*i,item,index);
+	  writeln(item,index)
+	end
+end.
+

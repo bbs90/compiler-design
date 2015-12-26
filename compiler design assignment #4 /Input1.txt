@@ -1,0 +1,16 @@
+program
+while final = b + ~c*(d - e)^3^(f + 2*g)/h - i do value = two - 3 * (( two + 5 ) / six );
+if final = b + ~c*(d - e)^3^(f + 2*g)/h - i then value = two - 3 * (( two + 5 ) / six ); 
+while answer <> three * ( ~ 9 mod # 3 ) div four do result = 5+76-(200mod(58-18));
+if answer <> three * ( ~ 9 mod # 3 ) div four then result = 5+76-(200mod(58-18));
+while solution < b+c*d^2^3-e do amount=amount*rate*(1+rate)^n/((1+rate)^n-1);
+if solution < b+c*d^2^3-e then amount=amount*rate*(1+rate)^n/((1+rate)^n-1);
+while nest > (((((data))))) do poly = (((a*x+b)*c+d)*x+e) mod divisor;
+if nest > (((((data))))) then poly = (((a*x+b)*c+d)*x+e) mod divisor;
+while quad <= first/second/third/fourth do ans = 9 - 5 + 2 ;
+if quad <= first/second/third/fourth then ans = 9 - 5 + 2 ;
+while root1 >= (~b+(b^2-4*a*c)^(1/2))/(2*a) do grade=(1/4)*labs+(1/4)*exam1+(1/4)*exam2+(1/4)*final;
+if root1 >= (~b+(b^2-4*a*c)^(1/2))/(2*a) then grade=(1/4)*labs+(1/4)*exam1+(1/4)*exam2+(1/4)*final;
+while a+x^y > #b*~y do c=d^v;
+if a+x^y > #b*~y then c=d^v;
+end.

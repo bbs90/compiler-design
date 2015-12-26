@@ -1,0 +1,209 @@
+{
+ 
+ B.Bhargav Sastry
+ COSC 5340   
+ Programming Language
+ COURSE ASSIGNMENT I
+ Fall 2014
+ 
+ The Assignment has been done using Free Pascal Compiler
+ Version 2.6.2-8 [2014/01/22] for x86_64 system.
+ 
+ This Program has been compiled in a Linux system(Ubuntu 14.04)
+ therefore line ending in output file is in linux format.
+ Please open all files in wordpad or Microsoft Word while using
+ Microsoft Windows Operating System for proper viewing.
+ 
+ I have included my own input(last three) after the input which was 
+ provided(which are executed column wise) in the pdf.
+ 
+}
+
+program plassignment1;
+	
+var { Declaring Global Variables }
+	CurrentCharacter:char;
+	ExprValue:integer;
+	ip:textfile;
+	op:textfile;
+
+
+{Procedure GetCaracter is used for reading characters
+one by one from input file and writing them in output
+file and changing the value of the parameter(as values are passed by
+reference)}	
+
+procedure GetCharacter(var token:char);
+
+begin {GetCharacter}
+			
+	
+				read(ip, token);
+				write(op, token);
+	
+	
+end;	{GetCharacter}
+	
+	
+procedure Expression( var cc:char; var expr:integer );
+
+var
+	termvalue:integer;
+	
+{
+Procedure Factor checks if the parameter cc(character typer) is a
+number or not. If it is a number then appropriate number is assigned to 
+parameter factorvalue. If cc is '(' then  procedure 
+GetCharacter is called followed by procedure Expression is called and 
+then it continues(recursion) till factorvalue is assigned a digit. If 
+the cc value is '(' then Getcharacter() is called. 
+}	
+
+procedure Factor(var cc:char; var factorvalue:integer);
+
+var
+	value:integer;
+	
+begin {Factor}
+		if cc='0' then
+			begin
+				factorvalue:=0;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='1' then
+			begin
+				factorvalue:=1;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='2' then
+			begin
+				factorvalue:=2;
+				GetCharacter( cc );
+			end;	
+		
+		 if cc='3' then
+			begin
+				factorvalue:=3;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='4' then
+			begin
+				factorvalue:=4;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='5' then
+			begin
+				factorvalue:=5;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='6' then
+			begin
+				factorvalue:=6;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='7' then
+			begin
+				factorvalue:=7;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='8' then
+			begin
+				factorvalue:=8;
+				GetCharacter( cc );
+			end;	
+		
+		if cc='9' then
+			begin
+				factorvalue:=9;
+				GetCharacter( cc );
+			end;	
+		if  cc='('  then
+			begin
+					GetCharacter( cc );
+					Expression( cc, value );
+					factorvalue:=value;
+					if  cc=')'  then
+					begin
+						GetCharacter( cc );
+					end;
+			end;
+	
+end;	{Factor}	
+	
+	
+{
+Precedure Term calls procedure Factor and assigns value to parameter
+termvalue(passed by reference). It performs the multiplication operation
+by getting the next character and multiplying termvalue and factorvalue
+and the result is stored in termvalue. Then modulo 10 value of termvalue
+is obtained and stored in termvalue.
+}
+procedure Term(var cc:char; var termvalue:integer);
+var
+	factorvalue:integer;
+
+begin {Term}
+
+	Factor( cc, factorvalue );
+	termvalue:=factorvalue;
+	
+	while (cc='*') do
+	begin
+		GetCharacter( cc );
+		Factor( cc, factorvalue );
+		termvalue:=(termvalue*factorvalue) mod 10;
+	end;
+
+end; {Term}
+
+{
+Procedure Expression calls procedure Term from which it obtains value
+of variable expr(by storing termvalue data in expr). Then it performs 
+addition and modulo 10 operation if cc value is '+' by entering the 
+while loop. 
+}
+begin {Expression}
+
+	Term(cc, termvalue);
+	expr:=termvalue;
+	while (cc= '+') do
+		begin
+			GetCharacter( cc );
+			Term( cc, termvalue );
+			expr:=(expr+termvalue) mod 10;		
+		end;
+		
+end;	{Expression}
+
+
+	
+begin {Main body}	
+
+	assign(ip, 'input.txt');
+	reset(ip);
+	assign(op, 'output.txt');
+	rewrite(op);
+	
+	while  not eof (ip) do
+	begin
+		
+		write(op, 'THE MODULO 10 VALUE OF ');
+		GetCharacter(CurrentCharacter);
+		Expression(CurrentCharacter,ExprValue);
+		write(op, 'IS: ', ExprValue);
+		writeln(op);
+				
+	end;
+	
+	close(op);
+	close(ip);
+	
+end.
+
